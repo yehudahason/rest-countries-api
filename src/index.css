@@ -1,1 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Grey */
+  --color-grey-950: #111517;
+  --color-grey-400: #808080;
+  --color-grey-350: #979797;
+  --color-grey-300: #b2b2b2;
+  --color-grey-250: #c4c4c4;
+  --color-grey-50: #fcfcfc;
+
+  /* Blue */
+  --color-blue-950: #202c36;
+  --color-blue-900: #2b3844;
+}
+
+@utility text-preset-1 {
+  @apply text-[2rem] font-extrabold leading-[137.5%] tracking-[0];
+}
+
+@utility text-preset-2 {
+  @apply text-[1.5rem] font-extrabold leading-[137.5%] tracking-[0];
+}
+
+@utility text-preset-3 {
+  @apply text-[1.125rem] font-extrabold leading-[145%] tracking-[0];
+}
+
+@utility text-preset-4-semibold {
+  @apply text-[1rem] font-semibold leading-[200%] tracking-[0];
+}
+
+@utility text-preset-4-light {
+  @apply text-[1rem] font-light leading-[200%] tracking-[0];
+}
+
+@utility text-preset-5 {
+  @apply text-[0.875rem] font-normal leading-[145%] tracking-[0];
+}
+
+@utility text-preset-5-light {
+  @apply text-[0.875rem] font-light leading-[225%] tracking-[0];
+}
+
+@utility text-preset-6-semibold {
+  @apply text-[0.75rem] font-semibold leading-[135%] tracking-[0];
+}
+
+@utility text-preset-6 {
+  @apply text-[0.75rem] font-normal leading-[135%] tracking-[0];
+}
+
+@utility text-preset-6-light {
+  @apply text-[0.75rem] font-light leading-[135%] tracking-[0];
+}
+@theme {
+  --font-sans: "Nunito Sans", sans-serif;
+}
