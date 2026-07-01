@@ -17,7 +17,11 @@ export default function App() {
   return (
     <>
       <Header dark={dark} setDark={setDark} />
-      <main className="min-h-screen dark:text-white flex flex-col gap-6 justify-start items-center dark:bg-blue-950 bg-gray-100">
+      <main
+        className="
+      
+      min-h-screen dark:text-white flex flex-col gap-6 justify-start items-center dark:bg-blue-950 bg-gray-100"
+      >
         {!flagPage ? (
           <Main
             searchTerm={searchTerm}
@@ -27,7 +31,7 @@ export default function App() {
             setFlagPage={setFlagPage}
           />
         ) : (
-          <FlagPage flag={flagPage} />
+          <FlagPage flag={flagPage} setFlagPage={setFlagPage} />
         )}
       </main>
       <Footer />

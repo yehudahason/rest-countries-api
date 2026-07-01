@@ -32,7 +32,7 @@ export default function Main({
 
   return (
     <>
-      <div className="mt-8 flex w-full flex-col gap-10 md:flex-row sm:px-10  px-3 items-center  md:justify-between">
+      <div className="mt-8 flex w-full flex-col gap-10 md:flex-row   px-4 items-center  md:justify-between max-w-360">
         <div className="relative w-full max-w-100">
           <label htmlFor="country-search" className="sr-only">
             Search for a country
@@ -56,7 +56,7 @@ export default function Main({
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search for a country..."
-            className="text-preset-5 h-14 w-full rounded-md bg-white dark:bg-blue-900 pl-16 pr-4 shadow-md  border-none placeholder:text-grey-400"
+            className="text-preset-4-semibold h-14 w-full rounded-md bg-white dark:bg-blue-900 pl-16 pr-4 shadow-md  border-none placeholder:text-grey-400"
           />
         </div>
 
@@ -66,7 +66,7 @@ export default function Main({
           </label>
           <select
             id="region-filter"
-            className="text-preset-5 h-14 w-full appearance-none rounded-md bg-white px-6 pr-12 shadow-md  
+            className="text-preset-4-semibold h-14 w-full appearance-none rounded-md bg-white px-6 pr-12 shadow-md  
               border-none
             dark:bg-blue-900
             cursor-pointer"
@@ -105,7 +105,7 @@ export default function Main({
           </svg>
         </div>
       </div>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-7 w-full lg:px-20 p-0 m-0 h-fit">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-7 w-full  p-0 m-0 h-fit max-w-360">
         {data
           ?.filter((item) =>
             item.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -121,6 +121,7 @@ export default function Main({
                 className="bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-56 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
               >
                 <button
+                  className="cursor-pointer"
                   type="button"
                   onClick={() => {
                     setFlagPage(item);
