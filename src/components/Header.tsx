@@ -7,7 +7,7 @@ export default function Header({ dark, setDark }: HeaderProps) {
   const baseUrl = import.meta.env.BASE_URL;
 
   return (
-    <header className="flex justify-between items-center  sm:px-8  px-4 py-8 dark:bg-blue-900 text-gray-950 shadow-sm">
+    <header className="flex justify-between items-center  sm:px-8  px-4 py-8 dark:bg-blue-900 text-gray-950 border-b border-gray-200 shadow-lg">
       <a href={baseUrl}>
         <h1 className="sm:text-preset-2  text-preset-5 dark:text-white">
           Where in the world

@@ -131,7 +131,7 @@ export default function App() {
                 text-preset-5
                 "
                   >
-                    <h2 className="text-preset-3 mb-5"> {item.name}</h2>
+                    <h2 className="text-preset-3 mb-2"> {item.name}</h2>
                     <p>
                       Population:
                       <span className="text-gray-700 dark:text-gray-400">
