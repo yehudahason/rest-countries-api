@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import Header from "./components/Header";
 import { useState, useEffect } from "react";
+import type { Country } from "./types";
 export default function App() {
   const baseUrl = import.meta.env.BASE_URL;
   const [dark, setDark] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { isPending, error, data, isFetching } = useQuery({
+  const [searchRegion, setSearchRegion] = useState<string>("");
+
+  const { isPending, error, data } = useQuery<Country[]>({
     queryKey: ["repoData"],
     queryFn: async () => {
       const response = await fetch(`${baseUrl}data.json`);
@@ -13,7 +16,6 @@ export default function App() {
         throw new Error(`HTTP ${response.status}`);
       }
       return await response.json();
-      console.log(response);
     },
   });
   useEffect(() => {
@@ -27,7 +29,7 @@ export default function App() {
   return (
     <>
       <Header dark={dark} setDark={setDark} />
-      <main className="h-full dark:text-white flex flex-col gap-6 justify-start items-center dark:bg-blue-950 bg-blue-50">
+      <main className="h-full min-h-screen dark:text-white flex flex-col gap-6 justify-start items-center dark:bg-blue-950 bg-gray-100">
         <div className="mt-8 flex w-full flex-col gap-10 md:flex-row sm:px-10  px-3 items-center  md:justify-between">
           <div className="relative w-full max-w-80">
             <label htmlFor="country-search" className="sr-only">
@@ -66,15 +68,25 @@ export default function App() {
               border-none
             dark:bg-blue-900
             cursor-pointer"
+              value={searchRegion}
+              onChange={(e) => setSearchRegion(e.target.value)}
             >
               <option value="" className="cursor-pointer">
                 Filter by Region
               </option>
-              <option className="hover:bg-gray-500">Africa</option>
+              <option value="Africa" className="hover:bg-gray-500">
+                Africa
+              </option>
               <option className="hover:bg-gray-500">Americas</option>
-              <option className="hover:bg-gray-500">Asia</option>
-              <option className="hover:bg-gray-500">Europe</option>
-              <option className="hover:bg-gray-500">Oceania</option>
+              <option value="Asia" className="hover:bg-gray-500">
+                Asia
+              </option>
+              <option value="Europe" className="hover:bg-gray-500">
+                Europe
+              </option>
+              <option value="" className="hover:bg-gray-500">
+                Oceania
+              </option>
             </select>
 
             <svg
@@ -93,9 +105,13 @@ export default function App() {
         </div>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-7 w-full lg:px-20 p-0 m-0 h-fit">
           {data
-            ?.filter((recipe) =>
-              recipe.name.toLowerCase().includes(searchTerm.toLowerCase()),
+            ?.filter((item) =>
+              item.name.toLowerCase().includes(searchTerm.toLowerCase()),
             )
+            .filter((item) => {
+              if (searchRegion === "") return true;
+              else return item.region === searchRegion;
+            })
             .map((item) => {
               return (
                 <li
