@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 type HeaderProps = {
   dark: boolean;
   setDark: (value: boolean | ((prev: boolean) => boolean)) => void;

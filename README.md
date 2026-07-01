@@ -4,6 +4,8 @@
 
 ## Welcome! 👋
 
+This is a solution to the [REST Countries API with color theme switcher challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
+
 Thanks for checking out this front-end coding challenge.
 
 [Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
@@ -31,7 +33,7 @@ Your users should be able to:
 - Filter countries by region
 - Click on a country to see more detailed information on a separate page
 - Click through to the border countries on the detail page
-- Toggle the color scheme between light and dark mode *(optional)*
+- Toggle the color scheme between light and dark mode _(optional)_
 
 ## The data
 
@@ -49,7 +51,14 @@ Here's a trimmed example of a single country object, showing the fields the desi
   "population": 83516593,
   "topLevelDomain": [".de"],
   "currencies": [{ "code": "EUR", "name": "Euro", "symbol": "€" }],
-  "languages": [{ "iso639_1": "de", "iso639_2": "deu", "name": "German", "nativeName": "Deutsch" }],
+  "languages": [
+    {
+      "iso639_1": "de",
+      "iso639_2": "deu",
+      "name": "German",
+      "nativeName": "Deutsch"
+    }
+  ],
   "borders": ["AUT", "BEL", "CZE", "DNK", "FRA", "LUX", "NLD", "POL", "CHE"],
   "alpha3Code": "DEU",
   "flags": {
@@ -63,20 +72,20 @@ Each object includes some extra fields too (such as `alpha2Code`, `callingCodes`
 
 ### Fields used in the design
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `name` | string | The country's common name, shown on the cards and detail page |
-| `nativeName` | string | The country's name in its native language, shown on the detail page |
-| `flags` | object | Flag image URLs in `svg` and `png` formats (served by [flagcdn.com](https://flagcdn.com)) |
-| `population` | number | Total population, used on the cards and detail page |
-| `region` | string | The region the country belongs to, used by the region filter |
-| `subregion` | string | The more specific subregion, shown on the detail page |
-| `capital` | string | The capital city |
-| `topLevelDomain` | array | The country's top-level domain(s), for example `[".de"]` |
-| `currencies` | array | Currency objects, each with a `code`, `name`, and `symbol` |
-| `languages` | array | Language objects, each with the language `name` and its codes |
-| `borders` | array | The `alpha3Code`s of bordering countries, used to link between detail pages |
-| `alpha3Code` | string | The country's three-letter code, used to match `borders` back to countries |
+| Property         | Type   | Description                                                                               |
+| ---------------- | ------ | ----------------------------------------------------------------------------------------- |
+| `name`           | string | The country's common name, shown on the cards and detail page                             |
+| `nativeName`     | string | The country's name in its native language, shown on the detail page                       |
+| `flags`          | object | Flag image URLs in `svg` and `png` formats (served by [flagcdn.com](https://flagcdn.com)) |
+| `population`     | number | Total population, used on the cards and detail page                                       |
+| `region`         | string | The region the country belongs to, used by the region filter                              |
+| `subregion`      | string | The more specific subregion, shown on the detail page                                     |
+| `capital`        | string | The capital city                                                                          |
+| `topLevelDomain` | array  | The country's top-level domain(s), for example `[".de"]`                                  |
+| `currencies`     | array  | Currency objects, each with a `code`, `name`, and `symbol`                                |
+| `languages`      | array  | Language objects, each with the language `name` and its codes                             |
+| `borders`        | array  | The `alpha3Code`s of bordering countries, used to link between detail pages               |
+| `alpha3Code`     | string | The country's three-letter code, used to match `borders` back to countries                |
 
 A few small territories have empty or zero values for fields like `capital` or `borders`, so it's worth handling those gracefully in your UI.
 
@@ -111,7 +120,7 @@ We've included two files to help you if you're using AI coding assistants (like 
 
 **How to use them:** You don't need to do anything! These files are automatically detected by most AI coding tools. The AI will read them and adjust its behavior to be a better learning partner—guiding you toward solutions rather than just giving you the answers.
 
-**Note:** These files are designed to help you *learn*, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
+**Note:** These files are designed to help you _learn_, not to do the work for you. The AI is instructed to ask questions, give hints, and explain concepts rather than writing complete solutions.
 
 ## Building your project
 
