@@ -8,7 +8,7 @@ export default function Header({ dark, setDark }: HeaderProps) {
 
   return (
     <header className="dark:bg-blue-900 shadow-lg border-gray-200 border-b ">
-      <nav className="max-w-360 mx-auto flex justify-between items-center  sm:px-8  px-4 py-8  text-gray-950   ">
+      <nav className="max-w-360 mx-auto flex justify-between items-center  sm:px-14  px-4 py-8  text-gray-950   ">
         <a href={baseUrl}>
           <h1 className="sm:text-preset-2  text-preset-5 dark:text-white">
             Where in the world

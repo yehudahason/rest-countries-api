@@ -32,7 +32,7 @@ export default function Main({
 
   return (
     <>
-      <div className="mt-8 flex w-full flex-col gap-10 md:flex-row   px-4 items-center  md:justify-between max-w-360">
+      <div className="mt-8 flex w-full flex-col gap-10 md:flex-row  sm:px-12  px-4 items-center  md:justify-between max-w-360">
         <div className="relative w-full max-w-100">
           <label htmlFor="country-search" className="sr-only">
             Search for a country
@@ -130,7 +130,7 @@ export default function Main({
                   <img
                     src={item.flags.png}
                     alt={`Flag of ${item.name}`}
-                    className="w-full max-h-40 object-cover rounded-t-md"
+                    className="w-full aspect-5/3  max-h-40 object-cover rounded-t-md"
                   />
 
                   <div
@@ -138,6 +138,7 @@ export default function Main({
                  gap-1
                 h-fit p-4
                 text-preset-5
+                text-left
                 "
                   >
                     <h2 className="text-preset-3 mb-2"> {item.name}</h2>
