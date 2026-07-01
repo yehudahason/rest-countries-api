@@ -31,7 +31,7 @@ export default function App() {
       <Header dark={dark} setDark={setDark} />
       <main className="h-full min-h-screen dark:text-white flex flex-col gap-6 justify-start items-center dark:bg-blue-950 bg-gray-100">
         <div className="mt-8 flex w-full flex-col gap-10 md:flex-row sm:px-10  px-3 items-center  md:justify-between">
-          <div className="relative w-full max-w-80">
+          <div className="relative w-full max-w-100">
             <label htmlFor="country-search" className="sr-only">
               Search for a country
             </label>
