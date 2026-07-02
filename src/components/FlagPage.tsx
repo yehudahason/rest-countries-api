@@ -1,7 +1,7 @@
 import type { Country } from "../types";
 
 type FlagPageProps = {
-  flag: Country;
+  flag: Country | "";
   setFlagPage: (value: Country | "") => void;
 };
 
@@ -27,7 +27,7 @@ export default function FlagPage({ flag, setFlagPage }: FlagPageProps) {
       </div>
 
       <div className="flex max-w-7xl">
-        <img src={flag.flag} className="w-140 h-100" alt="" />
+        {flag && <img src={flag.flag} className="w-140 h-100" alt="" />}
       </div>
     </section>
   );

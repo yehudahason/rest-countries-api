@@ -1,4 +1,4 @@
-type HeaderProps = {
+export type HeaderProps = {
   dark: boolean;
   setDark: (value: boolean | ((prev: boolean) => boolean)) => void;
 };
