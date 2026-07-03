@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Main from "./components/Main";
@@ -30,7 +30,7 @@ export default function App() {
   if (error) return <h1>{error.message}</h1>;
   return (
     <>
-      <BrowserRouter basename={baseUrl}>
+      <HashRouter>
         <Routes>
           <Route element={<Layout dark={dark} setDark={setDark} />}>
             <Route
@@ -57,7 +57,7 @@ export default function App() {
             />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
