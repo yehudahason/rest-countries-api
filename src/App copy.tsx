@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import { useState, useEffect } from "react";
 import Main from "./components/Main";
 import type { Country } from "./types";
-import FlagPage from "./components/FlagPage";
+import FlagPage from "./components/CountryPage";
 export default function App() {
   const [dark, setDark] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");

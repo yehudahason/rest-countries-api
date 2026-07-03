@@ -1,34 +1,27 @@
-import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import type { Country } from "../types";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 type MainProps = {
+  data: Country[];
   searchTerm: string;
   searchRegion: string;
   setSearchTerm: (value: string) => void;
   setSearchRegion: (value: string) => void;
-  setFlagPage: (value: Country) => void;
 };
 export default function Main({
+  data,
   searchTerm,
   searchRegion,
   setSearchTerm,
   setSearchRegion,
-  setFlagPage,
 }: MainProps) {
-  const baseUrl = import.meta.env.BASE_URL;
-  const { isLoading, error, data } = useQuery<Country[]>({
-    queryKey: ["repoData"],
-    queryFn: async () => {
-      const response = await fetch(`${baseUrl}data.json`);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}`);
-      }
-      return await response.json();
-    },
-  });
-  if (isLoading) return "Loading...";
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  if (error) return <h1>{error.message}</h1>;
+  useEffect(() => {
+    setSearchTerm(searchParams.get("search") ?? "");
+  }, [searchParams, setSearchTerm]);
 
   return (
     <>
@@ -54,7 +47,12 @@ export default function Main({
             id="country-search"
             type="search"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setSearchParams({
+                search: e.target.value,
+              });
+            }}
             placeholder="Search for a country..."
             className="text-preset-4-semibold h-14 w-full rounded-md bg-white dark:bg-blue-900 pl-16 pr-4 shadow-md  border-none placeholder:text-grey-400"
           />
@@ -124,7 +122,7 @@ export default function Main({
                   className="cursor-pointer"
                   type="button"
                   onClick={() => {
-                    setFlagPage(item);
+                    navigate(`/country/${item.name}`);
                   }}
                 >
                   <img

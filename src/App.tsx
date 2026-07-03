@@ -1,19 +1,33 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import Main from "./components/Main";
 import Layout from "./components/Layout";
 import type { Country } from "./types";
-import FlagPage from "./components/FlagPage";
+import CountryPage from "./components/CountryPage";
 export default function App() {
   const [dark, setDark] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchRegion, setSearchRegion] = useState<string>("");
-  const [flagPage, setFlagPage] = useState<Country | "">("");
+  const [countryPage, setCountryPage] = useState<Country | "">("");
   const baseUrl = import.meta.env.BASE_URL;
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
+  const { isLoading, error, data } = useQuery<Country[]>({
+    queryKey: ["repoData"],
+    queryFn: async () => {
+      const response = await fetch(`${baseUrl}data.json`);
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      return await response.json();
+    },
+  });
+  if (isLoading) return "Loading...";
+
+  if (error) return <h1>{error.message}</h1>;
   return (
     <>
       <BrowserRouter basename={baseUrl}>
@@ -23,17 +37,23 @@ export default function App() {
               path="/"
               element={
                 <Main
+                  data={data ?? []}
                   searchTerm={searchTerm}
                   searchRegion={searchRegion}
                   setSearchTerm={setSearchTerm}
                   setSearchRegion={setSearchRegion}
-                  setFlagPage={setFlagPage}
                 />
               }
             />
             <Route
-              path="*"
-              element={<FlagPage flag={flagPage} setFlagPage={setFlagPage} />}
+              path="/country/:name"
+              element={
+                <CountryPage
+                  data={data ?? []}
+                  countryPage={countryPage}
+                  setCountryPage={setCountryPage}
+                />
+              }
             />
           </Route>
         </Routes>
