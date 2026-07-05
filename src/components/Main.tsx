@@ -103,7 +103,7 @@ export default function Main({
           </svg>
         </div>
       </div>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-7 w-full  p-0 m-0 h-fit max-w-360">
+      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-8 w-full  p-0 m-0 h-fit max-w-360">
         {data
           ?.filter((item) =>
             item.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -116,7 +116,7 @@ export default function Main({
             return (
               <li
                 key={item.name}
-                className="bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-56 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
+                className="bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-65 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
               >
                 <button
                   className="cursor-pointer"
