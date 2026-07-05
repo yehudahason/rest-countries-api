@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import type { Country } from "../types";
+import type { Country } from "./types";
 
 import { useParams, useNavigate } from "react-router-dom";
 type CountryPageProps = {
@@ -23,7 +23,7 @@ export default function CountryPage({
   }, [data, name, setCountryPage]);
 
   return (
-    <section className="w-full  py-12 px-8 max-w-360 mx-auto">
+    <section className="w-full  py-12 sm:px-8  px-3 max-w-360 mx-auto">
       <div className="flex mb-6">
         <button
           onClick={() => {
@@ -43,9 +43,9 @@ export default function CountryPage({
         </button>
       </div>
 
-      <div className="flex justify-center items-center flex-col lg:flex-row max-w-7xl gap-9 ">
+      <div className="flex custom:justify-center custom:items-start items-center flex-col custom:flex-row max-w-7xl pt-4 gap-16 ">
         {countryPage && (
-          <div className="lg:w-140">
+          <div className="max-w-140">
             <img
               src={countryPage.flag}
               className="object-cover aspect-5/3 w-full"
@@ -53,13 +53,13 @@ export default function CountryPage({
             />
           </div>
         )}
-        <div className="flex justify-start flex-col items-start gap-6 p-6  lg:w-140 w-full">
+        <div className="flex justify-center flex-col items-center gap-6   max-w-140 w-full">
           {countryPage && (
-            <div className="flex flex-col">
-              <h2 className="text-preset-1 dark:text-white text-gray-950">
+            <>
+              <h2 className="text-preset-1 dark:text-white text-gray-950 text-left w-full ">
                 {countryPage.name}
               </h2>
-              <div className="grid grid-cols-2 ">
+              <div className="grid sm:grid-cols-2  grid-cols-1   sm:gap-4 w-full">
                 <div className="block">
                   <p className="text-preset-4-light">
                     <span className="text-preset-4-semibold">Native name:</span>{" "}
@@ -82,7 +82,7 @@ export default function CountryPage({
                     {countryPage.capital}
                   </p>
                 </div>
-                <div className="block">
+                <div className=" block">
                   <p className="text-preset-4-light">
                     <span className="text-preset-4-semibold">
                       Top Level Domain:
@@ -99,29 +99,31 @@ export default function CountryPage({
                   </p>
                 </div>
               </div>
-            </div>
+            </>
           )}
-          <div className="flex sm:flex-row sm:justify-start  flex-col gap-4">
-            <strong className=" pt-1 w-full max-w-[140px]">
-              Borders Countries:
-            </strong>
-            <ul className="flex flex-wrap items-start justify-start gap-4 max-w-[400px]">
-              {countryPage &&
-                countryPage.borders &&
-                countryPage.borders.map((border) => {
-                  const country = data.find(
-                    (country) => country.alpha3Code === border,
-                  );
-                  return (
-                    <li
-                      className="text-preset-4-light rounded bg-white px-1.5 dark:bg-blue-900"
-                      key={border}
-                    >
-                      {country?.name}
-                    </li>
-                  );
-                })}
-            </ul>
+          <div className="flex sm:flex-row w-full justify-start  flex-col gap-4 ">
+            {countryPage && countryPage.borders && (
+              <>
+                <strong className=" pt-1 w-full max-w-[140px]">
+                  Borders Countries:
+                </strong>
+                <ul className="flex flex-wrap items-start justify-start gap-4 max-w-[400px]">
+                  {countryPage.borders.map((border) => {
+                    const country = data.find(
+                      (country) => country.alpha3Code === border,
+                    );
+                    return (
+                      <li
+                        className="text-preset-4-light rounded bg-white px-1.5 dark:bg-blue-900"
+                        key={border}
+                      >
+                        {country?.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       </div>

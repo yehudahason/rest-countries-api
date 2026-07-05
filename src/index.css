@@ -15,6 +15,7 @@
   /* Blue */
   --color-blue-950: #202c36;
   --color-blue-900: #2b3844;
+  --breakpoint-custom: 70rem;
 }
 
 @utility text-preset-1 {

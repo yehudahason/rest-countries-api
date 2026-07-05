@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export type HeaderProps = {
   dark: boolean;
   setDark: (value: boolean | ((prev: boolean) => boolean)) => void;
@@ -14,20 +16,30 @@ export default function Header({ dark, setDark }: HeaderProps) {
             Where in the world
           </h1>
         </a>
-        <button
-          className="flex  items-center gap-2 cursor-pointer"
-          type="button"
-          onClick={() => setDark((prev) => !prev)}
-        >
-          <img
-            className="sm:w-8 sm:h-8 h-5 w-5"
-            src={`${baseUrl}${dark ? "sun-light33.png" : "dark-moon2.png"}`}
-            alt=""
-          />
-          <span className=" sm:text-preset-4-semibold dark:text-white text-gray-950 text-preset-6-semibold">
-            {dark ? "Light Mode" : "Dark Mode"}
-          </span>
-        </button>
+        <div className="flex justify-center items-center gap-6">
+          <Link to="/bookmarks">
+            <img
+              className="dark:[filter:brightness(0)_invert(1)]"
+              src={`${baseUrl}bookmarks.svg`}
+              alt=""
+            />
+          </Link>
+
+          <button
+            className="flex  items-center gap-2 cursor-pointer"
+            type="button"
+            onClick={() => setDark((prev) => !prev)}
+          >
+            <img
+              className="sm:w-8 sm:h-8 h-5 w-5"
+              src={`${baseUrl}${dark ? "sun-light33.png" : "dark-moon2.png"}`}
+              alt=""
+            />
+            <span className=" sm:text-preset-4-semibold dark:text-white text-gray-950 text-preset-6-semibold">
+              {dark ? "Light Mode" : "Dark Mode"}
+            </span>
+          </button>
+        </div>
       </nav>
     </header>
   );

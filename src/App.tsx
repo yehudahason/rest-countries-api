@@ -2,14 +2,19 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Main from "./components/Main";
-import Layout from "./components/Layout";
+import Layout from "./Layout";
 import type { Country } from "./types";
-import CountryPage from "./components/CountryPage";
+import CountryPage from "./CountryPage";
+import BookMarks from "./BookMarks";
 export default function App() {
   const [dark, setDark] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [searchRegion, setSearchRegion] = useState<string>("");
   const [countryPage, setCountryPage] = useState<Country | "">("");
+
+  const [favorite, setFavorite] = useState<Country[]>([]);
+  const [list, setList] = useState<Country[]>([]);
+
   const baseUrl = import.meta.env.BASE_URL;
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
@@ -42,6 +47,10 @@ export default function App() {
                   searchRegion={searchRegion}
                   setSearchTerm={setSearchTerm}
                   setSearchRegion={setSearchRegion}
+                  list={list}
+                  setList={setList}
+                  favorite={favorite}
+                  setFavorite={setFavorite}
                 />
               }
             />
@@ -54,6 +63,10 @@ export default function App() {
                   setCountryPage={setCountryPage}
                 />
               }
+            />
+            <Route
+              path="bookmarks"
+              element={<BookMarks setList={setList} list={list ?? []} />}
             />
           </Route>
         </Routes>

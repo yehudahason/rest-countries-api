@@ -1,28 +1,50 @@
-import { useEffect } from "react";
+import {
+  useEffect,
+  type ChangeEvent,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import type { Country } from "../types";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-type MainProps = {
+interface MainProps {
+  list: Country[];
+  setList: Dispatch<SetStateAction<Country[]>>;
+
   data: Country[];
   searchTerm: string;
   searchRegion: string;
-  setSearchTerm: (value: string) => void;
-  setSearchRegion: (value: string) => void;
-};
+  setSearchTerm: Dispatch<SetStateAction<string>>;
+  favorite: Country[];
+  setFavorite: Dispatch<SetStateAction<Country[]>>;
+  setSearchRegion: Dispatch<SetStateAction<string>>;
+}
 export default function Main({
   data,
   searchTerm,
   searchRegion,
   setSearchTerm,
   setSearchRegion,
+  list,
+  setList,
 }: MainProps) {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  function handleFavorite(item: Country): void {
+    setList((prev) => {
+      const exists = prev.some((country) => country.name === item.name);
+
+      if (exists) {
+        return prev.filter((country) => country.name !== item.name);
+      }
+
+      return [...prev, item];
+    });
+  }
   useEffect(() => {
     setSearchTerm(searchParams.get("search") ?? "");
   }, [searchParams, setSearchTerm]);
-
   return (
     <>
       <div className="mt-8 flex w-full flex-col gap-10 md:flex-row  sm:px-12  px-4 items-center  md:justify-between max-w-360">
@@ -47,7 +69,7 @@ export default function Main({
             id="country-search"
             type="search"
             value={searchTerm}
-            onChange={(e) => {
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
               setSearchTerm(e.target.value);
               setSearchParams({
                 search: e.target.value,
@@ -69,7 +91,9 @@ export default function Main({
             dark:bg-blue-900
             cursor-pointer"
             value={searchRegion}
-            onChange={(e) => setSearchRegion(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+              setSearchRegion(e.target.value)
+            }
           >
             <option value="" className="cursor-pointer">
               Filter by Region
@@ -116,8 +140,35 @@ export default function Main({
             return (
               <li
                 key={item.name}
-                className="bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-65 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
+                className="relative bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-65 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
               >
+                <button
+                  onClick={() => handleFavorite(item)}
+                  className="
+                  bg-white rounded-full p-1
+                  z-50 absolute top-1 right-1"
+                >
+                  <svg
+                    className={`${list.some((country) => country.name === item.name) ? "" : "hidden"}`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 -960 960 960"
+                    fill="#000000"
+                  >
+                    <path d="M240-120v-640q0-33 23.5-56.5T320-840h320q33 0 56.5 23.5T720-760v640L480-223 240-120Z" />
+                  </svg>
+                  <svg
+                    className={`${list.some((country) => country.name === item.name) ? "hidden" : ""}`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    fill="#1f1f1f"
+                  >
+                    <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
+                  </svg>
+                </button>
                 <button
                   className="cursor-pointer"
                   type="button"
