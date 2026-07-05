@@ -42,6 +42,7 @@ export default function Main({
       return [...prev, item];
     });
   }
+
   useEffect(() => {
     setSearchTerm(searchParams.get("search") ?? "");
   }, [searchParams, setSearchTerm]);
@@ -108,7 +109,7 @@ export default function Main({
             <option value="Europe" className="hover:bg-gray-500">
               Europe
             </option>
-            <option value="" className="hover:bg-gray-500">
+            <option value="Oceania" className="hover:bg-gray-500">
               Oceania
             </option>
           </select>
@@ -127,7 +128,10 @@ export default function Main({
           </svg>
         </div>
       </div>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-8 w-full  p-0 m-0 h-fit max-w-360">
+      <ul
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-8 w-full  p-0 m-0 h-fit max-w-360"
+        aria-label="List Of All Countries"
+      >
         {data
           ?.filter((item) =>
             item.name.toLowerCase().includes(searchTerm.toLowerCase()),
@@ -143,10 +147,17 @@ export default function Main({
                 className="relative bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-65 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
               >
                 <button
+                  type="button"
+                  aria-label={
+                    list.some((country) => country.name === item.name)
+                      ? `Remove ${item.name} from favorites`
+                      : `Add ${item.name} to favorites`
+                  }
+                  aria-pressed={list.some(
+                    (country) => country.name === item.name,
+                  )}
                   onClick={() => handleFavorite(item)}
-                  className="
-                  bg-white rounded-full p-1
-                  z-50 absolute top-1 right-1"
+                  className=" bg-white rounded-full cursor-pointer p-1 z-50 absolute top-1 right-1"
                 >
                   <svg
                     className={`${list.some((country) => country.name === item.name) ? "" : "hidden"}`}

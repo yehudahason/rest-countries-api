@@ -13,13 +13,19 @@ export default function App() {
   const [countryPage, setCountryPage] = useState<Country | "">("");
 
   const [favorite, setFavorite] = useState<Country[]>([]);
-  const [list, setList] = useState<Country[]>([]);
+  const [list, setList] = useState<Country[]>(() => {
+    const saved = localStorage.getItem("favorites");
+    return saved ? JSON.parse(saved) : [];
+  });
 
   const baseUrl = import.meta.env.BASE_URL;
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
   }, [dark]);
 
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(list));
+  }, [list]);
   const { isLoading, error, data } = useQuery<Country[]>({
     queryKey: ["repoData"],
     queryFn: async () => {

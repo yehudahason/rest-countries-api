@@ -19,9 +19,9 @@ export default function Header({ dark, setDark }: HeaderProps) {
         <div className="flex justify-center items-center gap-6">
           <Link to="/bookmarks">
             <img
-              className="dark:[filter:brightness(0)_invert(1)]"
+              className="dark:toWhite"
               src={`${baseUrl}bookmarks.svg`}
-              alt=""
+              alt="BookMarks"
             />
           </Link>
 

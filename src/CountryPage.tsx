@@ -49,7 +49,7 @@ export default function CountryPage({
             <img
               src={countryPage.flag}
               className="object-cover aspect-5/3 w-full"
-              alt=""
+              alt={`Flag of ${countryPage.name}`}
             />
           </div>
         )}
@@ -104,10 +104,10 @@ export default function CountryPage({
           <div className="flex sm:flex-row w-full justify-start  flex-col gap-4 ">
             {countryPage && countryPage.borders && (
               <>
-                <strong className=" pt-1 w-full max-w-[140px]">
+                <strong className=" pt-1 w-full max-w-35">
                   Borders Countries:
                 </strong>
-                <ul className="flex flex-wrap items-start justify-start gap-4 max-w-[400px]">
+                <ul className="flex flex-wrap items-start justify-start gap-4 max-w-100">
                   {countryPage.borders.map((border) => {
                     const country = data.find(
                       (country) => country.alpha3Code === border,
