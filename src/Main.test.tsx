@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import Main from "./components/Main";
 import type { Country } from "./types";
 import BookMarks from "./BookMarks";
-
+import data from "../public/data.json";
 const mockCountry = {
   name: "France",
   population: 67000000,
@@ -21,27 +21,25 @@ describe("Main", () => {
     render(
       <MemoryRouter>
         <Main
-          data={[mockCountry]}
-          searchTerm=""
+          data={data as Country[]}
+          searchTerm="israel"
           searchRegion=""
           setSearchTerm={vi.fn()}
           setSearchRegion={vi.fn()}
           list={[]}
           setList={vi.fn()}
-          favorite={[]}
-          setFavorite={vi.fn()}
         />
       </MemoryRouter>,
     );
 
-    expect(screen.getByText("France")).toBeInTheDocument();
+    expect(screen.getByText("Israel")).toBeInTheDocument();
     expect(screen.getByText(/Population:/i)).toBeInTheDocument();
     expect(screen.getByText(/Region:/i)).toBeInTheDocument();
     expect(screen.getByText(/Capital:/i)).toBeInTheDocument();
   });
 });
 
-describe("Main", () => {
+describe("BookMarks", () => {
   it("renders a country card", () => {
     render(
       <MemoryRouter>

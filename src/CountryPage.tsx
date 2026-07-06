@@ -45,7 +45,7 @@ export default function CountryPage({
 
       <div className="flex custom:justify-center custom:items-start items-center flex-col custom:flex-row max-w-7xl pt-4 gap-16 ">
         {countryPage && (
-          <div className="max-w-140">
+          <div className="w-140  max-w-full">
             <img
               src={countryPage.flag}
               className="object-cover aspect-5/3 w-full"

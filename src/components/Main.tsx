@@ -15,8 +15,6 @@ interface MainProps {
   searchTerm: string;
   searchRegion: string;
   setSearchTerm: Dispatch<SetStateAction<string>>;
-  favorite: Country[];
-  setFavorite: Dispatch<SetStateAction<Country[]>>;
   setSearchRegion: Dispatch<SetStateAction<string>>;
 }
 export default function Main({

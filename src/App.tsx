@@ -12,10 +12,16 @@ export default function App() {
   const [searchRegion, setSearchRegion] = useState<string>("");
   const [countryPage, setCountryPage] = useState<Country | "">("");
 
-  const [favorite, setFavorite] = useState<Country[]>([]);
   const [list, setList] = useState<Country[]>(() => {
-    const saved = localStorage.getItem("favorites");
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem("favorites");
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      if (e instanceof Error) {
+        console.log(e.message);
+      }
+      return [];
+    }
   });
 
   const baseUrl = import.meta.env.BASE_URL;
@@ -55,8 +61,6 @@ export default function App() {
                   setSearchRegion={setSearchRegion}
                   list={list}
                   setList={setList}
-                  favorite={favorite}
-                  setFavorite={setFavorite}
                 />
               }
             />
