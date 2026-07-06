@@ -5,6 +5,7 @@ import Main from "./components/Main";
 import type { Country } from "./types";
 import BookMarks from "./BookMarks";
 import data from "../public/data.json";
+
 const mockCountry = {
   name: "France",
   population: 67000000,
