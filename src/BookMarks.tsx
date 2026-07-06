@@ -30,7 +30,7 @@ export default function BookMarks({ list, setList }: CountryPageProps) {
         </button>
       </div>
       {list.length === 0 ? (
-        <h3 className="text-center w-full text-preset-4-semibold">
+        <h3 className="text-center w-full text-preset-1 mt-6">
           No Bookmarks Saved Yet ..
         </h3>
       ) : (

@@ -43,12 +43,6 @@ export default function Main({
     });
   }
 
-  const filteredCountries = data
-    .filter((item) =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()),
-    )
-    .filter((item) => searchRegion === "" || item.region === searchRegion);
-
   useEffect(() => {
     setSearchTerm(searchParams.get("search") ?? "");
   }, [searchParams, setSearchTerm]);
@@ -134,19 +128,23 @@ export default function Main({
           </svg>
         </div>
       </div>
-
-      {filteredCountries.length === 0 ? (
-        <h3 className="text-center w-full text-preset-1 mt-6">No Results</h3>
-      ) : (
-        <ul
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-8 w-full p-0 m-0 h-fit max-w-360"
-          aria-label="List Of All Countries"
-        >
-          {filteredCountries.map((item) => {
+      <ul
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center gap-8 w-full  p-0 m-0 h-fit max-w-360"
+        aria-label="List Of All Countries"
+      >
+        {data
+          ?.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()),
+          )
+          .filter((item) => {
+            if (searchRegion === "") return true;
+            else return item.region === searchRegion;
+          })
+          .map((item) => {
             return (
               <li
                 key={item.name}
-                className="relative bg-white p-0 m-0 dark:bg-blue-900 text-gray-950 min-h-70 w-65 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left"
+                className="relative bg-white p-0 m-0 dark:bg-blue-900 text-gray-950  min-h-70 w-65 h-fit dark:text-white shadow-md rounded-t-md flex flex-col text-left "
               >
                 <button
                   type="button"
@@ -159,14 +157,10 @@ export default function Main({
                     (country) => country.name === item.name,
                   )}
                   onClick={() => handleFavorite(item)}
-                  className="bg-white rounded-full cursor-pointer p-1 z-50 absolute top-1 right-1"
+                  className=" bg-white rounded-full cursor-pointer p-1 z-50 absolute top-1 right-1"
                 >
                   <svg
-                    className={
-                      list.some((country) => country.name === item.name)
-                        ? ""
-                        : "hidden"
-                    }
+                    className={`${list.some((country) => country.name === item.name) ? "" : "hidden"}`}
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
                     height="24"
@@ -175,45 +169,46 @@ export default function Main({
                   >
                     <path d="M240-120v-640q0-33 23.5-56.5T320-840h320q33 0 56.5 23.5T720-760v640L480-223 240-120Z" />
                   </svg>
-
                   <svg
-                    className={
-                      list.some((country) => country.name === item.name)
-                        ? "hidden"
-                        : ""
-                    }
+                    className={`${list.some((country) => country.name === item.name) ? "hidden" : ""}`}
                     xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
+                    width="24px"
+                    height="24px"
                     viewBox="0 -960 960 960"
                     fill="#1f1f1f"
                   >
                     <path d="M200-120v-640q0-33 23.5-56.5T280-840h400q33 0 56.5 23.5T760-760v640L480-240 200-120Zm80-122 200-86 200 86v-518H280v518Zm0-518h400-400Z" />
                   </svg>
                 </button>
-
                 <button
                   className="cursor-pointer"
                   type="button"
-                  onClick={() => navigate(`/country/${item.name}`)}
+                  onClick={() => {
+                    navigate(`/country/${item.name}`);
+                  }}
                 >
                   <img
                     src={item.flags.png}
                     alt={`Flag of ${item.name}`}
-                    className="w-full aspect-5/3 max-h-40 object-cover rounded-t-md"
+                    className="w-full aspect-5/3  max-h-40 object-cover rounded-t-md"
                   />
 
-                  <div className="flex flex-col justify-center gap-1 h-fit p-4 text-preset-5 text-left">
-                    <h2 className="text-preset-3 mb-2">{item.name}</h2>
-
+                  <div
+                    className="flex flex-col justify-center
+                 gap-1
+                h-fit p-4
+                text-preset-5
+                text-left
+                "
+                  >
+                    <h2 className="text-preset-3 mb-2"> {item.name}</h2>
                     <p>
                       Population:
                       <span className="text-gray-700 dark:text-gray-400">
                         {" "}
                         {item.population}
-                      </span>
+                      </span>{" "}
                     </p>
-
                     <p>
                       Region:
                       <span className="text-gray-700 dark:text-gray-400">
@@ -221,7 +216,6 @@ export default function Main({
                         {item.region}
                       </span>
                     </p>
-
                     <p>
                       Capital:
                       <span className="text-gray-700 dark:text-gray-400">
@@ -234,8 +228,7 @@ export default function Main({
               </li>
             );
           })}
-        </ul>
-      )}
+      </ul>
     </>
   );
 }
