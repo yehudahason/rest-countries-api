@@ -99,7 +99,11 @@ export default function CountryPage({
                   </p>
                   <p className="text-preset-4-light">
                     <span className="text-preset-4-semibold">Languages:</span>{" "}
-                    {countryPage.languages.map((item) => item.name).join(", ")}
+                    {countryPage.languages
+                      ? countryPage.languages
+                          .map((item) => item.name)
+                          .join(", ")
+                      : ""}
                   </p>
                 </div>
               </div>
